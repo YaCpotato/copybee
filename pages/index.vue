@@ -13,6 +13,7 @@
             <th class="text-left">
               overView
             </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +23,11 @@
           >
             <td>{{ project.title }}</td>
             <td>{{ project.overView }}</td>
+            <td>
+              <v-btn>
+                <nuxt-link :to="`/projects/${project.id}`">開く</nuxt-link>
+              </v-btn>
+            </td>
           </tr>
         </tbody>
       </template>
