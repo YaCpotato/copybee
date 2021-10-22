@@ -11,6 +11,9 @@ export const state = () => ({
 export const getters = {
  user: state => {
    return state.user
+ },
+ isAuthenticated: state => {
+   return state.user.login
  }
 }
 
