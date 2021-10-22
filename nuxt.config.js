@@ -61,8 +61,14 @@ export default {
           measurementId: process.env.MEASUREMENT_ID
         },
         services: {
-          auth: true // Just as example. Can be any other service.
-        }
+          auth: true,
+          firestore: true,
+          functions: true,
+          storage: true,
+          database: true,
+          messaging: true
+        },
+        onFirebaseHosting:true
       }
     ],
     '@nuxtjs/dotenv'
