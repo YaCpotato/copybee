@@ -9,13 +9,9 @@ export const state = () => ({
  project: {
     id:null,
     title: '',
-    overView: '',
-    copyAndPasteList: {
-    content: '',
-    discription: '',
-    order: null
-  }
- }
+    overView: ''
+ },
+ balloons:[]
 })
 
 export const getters = {
@@ -66,11 +62,17 @@ export const mutations = {
     state.project.id = payload.id;
     state.project.title = payload.title;
     state.project.overView = payload.overView;
-    state.project.copyAndPasteList = {
-        content: payload.copyAndPasteList.content,
-        discription: payload.copyAndPasteList.discription,
-        order: payload.copyAndPasteList.order
-    };
+  },
+  fetchBalloons(state, payload) {
+    for (const balloon of payload) {
+      state.balloons.push({
+        id: balloon.id,
+        title: balloon.title,
+        content: balloon.content,
+        discription: balloon.discription,
+        order: balloon.order
+      })
+    }
   },
   switchLogin (state) {
     state.user.login = true

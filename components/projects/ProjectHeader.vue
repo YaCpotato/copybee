@@ -16,11 +16,13 @@
 </template>
 <script>  
 export default {
-  props: {
-    project: {
-      type:Object,
-      default:null
+  data() {
+    return {
+      project:{}
     }
+  },
+  created() {
+    this.project = this.$store.state.project
   }
 }
 </script>

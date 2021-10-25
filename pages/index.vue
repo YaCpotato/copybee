@@ -32,6 +32,7 @@
         </tbody>
       </template>
     </v-simple-table>
+    <nuxt-child />
   </div>
 </template>
 <script>
