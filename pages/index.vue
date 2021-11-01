@@ -24,8 +24,10 @@
             <td>{{ project.title }}</td>
             <td>{{ project.overView }}</td>
             <td>
-              <v-btn>
-                <nuxt-link :to="`/projects/${project.id}`">開く</nuxt-link>
+              <v-btn
+                @click="openProject(project.id)"
+              >
+              開く
               </v-btn>
             </td>
           </tr>
@@ -49,6 +51,19 @@ export default {
   this.getData()
   },
   methods: {
+    openProject(projectId) {
+      const db = firebase.firestore()
+      const projectRef = db.collection("projects").doc(projectId)
+      projectRef.get().then((doc)=>{
+        if (doc.exists) {
+          this.$store.commit('fetchProject', doc.data())
+        }
+        this.$router.push("/projects/" + projectId)
+      })
+      .catch( (error) => {
+          console.log(`データを取得できませんでした (${error})`);
+      });
+    },
     submit () {
      const db = firebase.firestore()
      const dbUsers = db.collection('projects')
