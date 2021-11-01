@@ -1,6 +1,22 @@
 <template>
-  <div class="container">
-    <v-btn @click="submit"></v-btn>
+  <v-app>
+    <v-btn
+          color="primary"
+          dark
+          @click.stop="openDialog = true"
+        >
+          Open Dialog
+        </v-btn>
+    <v-dialog
+      v-model="openDialog"
+      persistent
+      max-width="600px"
+    >
+      <ProjectFormDialog
+        @clickSubmit="onSubmit"
+        :title="title"
+        :over-view="overView" />
+    </v-dialog>
     <v-simple-table
     fixed-header
     height="600px">
@@ -35,16 +51,23 @@
       </template>
     </v-simple-table>
     <nuxt-child />
-  </div>
+  </v-app>
 </template>
 <script>
 import firebase from 'firebase'
+import ProjectFormDialog from '~/components/ProjectFormDialog'
 
 export default {
+  components: {
+    ProjectFormDialog
+  },
   data () {
     return {
       database: null,
-      projects:[]
+      projects:[],
+      openDialog: false,
+      title:"",
+      overView:""
     }
   },
   mounted() {
@@ -64,22 +87,18 @@ export default {
           console.log(`データを取得できませんでした (${error})`);
       });
     },
-    submit () {
+    onSubmit () {
+    this.openDialog = false
      const db = firebase.firestore()
      const dbUsers = db.collection('projects')
      dbUsers
         .add({
-          title: "sample title",
-          overView:"sample overview",
-          copyAndPasteList: {
-            content:"sample content",
-            discription: "sample discription",
-            order:0
-          }
+          title: this.title,
+          overView: this.overView
        })
        .then(ref => {
-         // eslint-disable-next-line no-console
-         console.log('Add ID: ', ref.id)
+         this.title = ""
+         this.overView = ""
        })
    },
    getData() {
@@ -90,12 +109,7 @@ export default {
         itemArray.push({
           id: doc.id,
           title: doc.data().title,
-          overView: doc.data().overView,
-          copyAndPasteList: {
-            content: doc.data().copyAndPasteList.content,
-            discription: doc.data().copyAndPasteList.discription,
-            order:doc.data().copyAndPasteList.order
-          }
+          overView: doc.data().overView
         })
       })
       this.projects = itemArray
