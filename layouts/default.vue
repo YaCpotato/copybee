@@ -4,22 +4,7 @@
       color="#6A76AB"
       dark
     >
-        <v-toolbar-title><NuxtLink to="/">Copy Bee!</NuxtLink></v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-
+    <v-toolbar-title><NuxtLink to="/">Copy Bee!</NuxtLink></v-toolbar-title>
       <!-- <template v-slot:extension>
         <v-tabs align-with-title>
           <v-tab>Tab 1</v-tab>

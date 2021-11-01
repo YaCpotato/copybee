@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <v-btn
-          color="primary"
-          dark
-          @click.stop="openDialog = true"
-        >
-          Open Dialog
-        </v-btn>
+      color="primary"
+      dark
+      @click.stop="openDialog = true"
+    >
+      プロジェクト追加
+    </v-btn>
     <v-dialog
       v-model="openDialog"
       persistent
